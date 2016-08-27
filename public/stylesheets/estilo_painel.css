@@ -1,0 +1,15 @@
+body{
+    background: url(../images/bgOld_moon.png);
+    padding-top: 80px;
+}
+
+.estilo_painel{
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    box-shadow: 5px 5px 5px #888;
+}
+
+.estilo_painel_int{
+    padding: 10px;
+}
