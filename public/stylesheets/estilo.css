@@ -118,6 +118,14 @@ footer{
     padding: 15px;
 }
 
+.envio-realizado{
+    display: none;
+}
+
+.envio-nao-realizado{
+    display: none;
+}
+
 .rodape-direita{
     padding-top: 10px;
     font-size: 15px;
