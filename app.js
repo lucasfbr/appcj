@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Configuring Passport
-app.use(expressSession({secret: 'mySecretKey'}));
+app.use(expressSession({secret: 'keyboard cat'}));
 app.use(passport.initialize());
 app.use(passport.session());
 

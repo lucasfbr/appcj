@@ -267,4 +267,8 @@ h1.error-message{
 ul.user-details{
     list-style: none;
 }
+
+.alert-login{
+    margin-top: 10px;
+}
 /*FIM FORM LOGIN E REGISTER*/

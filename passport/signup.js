@@ -20,8 +20,8 @@ module.exports = function (passport) {
 
                             // already exists
                             if (user) {
-                                console.log('User already exists with username: ' + username);
-                                return done(null, false, req.flash('message', 'User Already Exists'));
+                                console.log('Usuario ja existe no sistema: ' + username);
+                                return done(null, false, req.flash('message', 'Usuário já registrado no sistema!'));
                             } else {
                                 // if there is no user with that email
                                 // create the user
@@ -34,7 +34,7 @@ module.exports = function (passport) {
                                     lastname: req.param('lastName')
                                 })
                                     .then(function (newUser) {
-                                        console.log('User Registration succesful');
+                                        console.log('Usuario registrado com sucesso');
                                         return done(null, newUser);
                                     })
                                     .catch(function (err) {

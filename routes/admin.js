@@ -16,7 +16,10 @@ module.exports = function(passport){
   /* GET login page. */
   router.get('/', function(req, res) {
     // Display the Login page with any flash message, if any
-    res.render('login', { message: req.flash('message') });
+    res.render('login', {
+      message: req.flash('message'),
+      layout: 'layout_login'
+    });
   });
 
   /* Handle Login POST */
@@ -28,18 +31,24 @@ module.exports = function(passport){
 
   /* GET Registration Page */
   router.get('/signup', function(req, res){
-    res.render('register',{message: req.flash('message')});
+    res.render('register',{
+      message: req.flash('message'),
+      layout: 'layout_login'
+    });
   });
 
   /* Handle Registration POST */
   router.post('/signup', passport.authenticate('signup', {
     successRedirect: '/admin/painel',
-    failureRedirect: '/signup',
+    failureRedirect: '/admin/signup',
     failureFlash : true
   }));
 
   router.get('/painel', isAuthenticated, function(req, res){
-    res.render('admin/painel', { user: req.user });
+    res.render('admin/painel', {
+      user: req.user,
+      layout: 'layout_painel'
+    });
   });
 
   /* Handle Logout */
