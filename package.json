@@ -15,6 +15,13 @@
     "serve-favicon": "~2.3.0",
     "mongoose": "~4.5.10",
     "express-session": "~1.14.1",
-    "method-override": "~2.3.6"
+    "method-override": "~2.3.6",
+    "sequelize": "~3.24.1",
+    "lodash": "~4.15.0",
+    "passport": "~0.3.2",
+    "passport-local": "~1.0.0",
+    "bcrypt-nodejs": "0.0.3",
+    "connect-flash": "~0.1.1",
+    "mysql": "~2.11.1"
   }
 }

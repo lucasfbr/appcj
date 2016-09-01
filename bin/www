@@ -7,6 +7,15 @@
 var app = require('../app');
 var debug = require('debug')('appcj:server');
 var http = require('http');
+var db = require('./../models');
+
+//sincronize todos os meus módulos
+//caso eles não existam, crie eles
+db.sequelize.sync()
+    .then(function () {
+      console.log('Entidades criadas')
+    })
+
 
 /**
  * Get port from environment and store in Express.

@@ -1,21 +1,21 @@
-<section id="login">
-<div class="container-fluid class=colorido">
-    <div class="row-fluid">
-        <div class="col-xs-12">
-            <div class="form-login">
-                <h3>Efetue Login</h3>
-                <label class="sr-only" for="emailInput">E-mail:</label>
-                <input type="email" name="emailInput" id="emailInput" class="form-control input-lg" placeholder="E-mail" required />
-
-                <label class="sr-only" for="senhalInput">Senha:</label>
-                <input type="password" name="senhaInput" id="senhaInput" class="form-control input-lg" placeholder="Senha" required />
-
-                <button type="submit" class="btn btn-default btn-lg btn-block">
-                    <span class="glyphicon glyphicon-ok-sign"></span>
-                    Logar
-                </button>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h1 class="text-center login-title">Entre com seu login e senha
+                <div class="account-wall">
+                    <img class="profile-img" src=''>
+                    <form class="form-signin" action="/admin" method="POST">
+                        <input type="text" name="username" class="form-control" placeholder="Usuário" required autofocus />
+                        <input type="password" name="password" class="form-control" placeholder="Senha" required />
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+                        <span class="clearfix"></span>
+                    </form>
+                </div>
+                {{#if message}}
+                <div class="alert alert-danger alert-login" role="alert">{{message}}</div>
+                {{/if}}
+                <a href="/admin/signup" class="text-center new-account">Crie uma nova Conta</a>
+            </h1>
         </div>
     </div>
 </div>
-</section>

@@ -4,13 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var connection = require('./models');
+var passport = require('passport');
+var expressSession = require('express-session');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var servicos = require('./routes/servicos');
 var portifolio = require('./routes/portifolio');
 var quemsomos = require('./routes/quemsomos');
-var admin = require('./routes/admin');
 
 var app = express();
 
@@ -25,6 +27,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Configuring Passport
+app.use(expressSession({secret: 'keyboard cat'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Using the flash middleware provided by connect-flash to store messages in session
+// and displaying in templates
+var flash = require('connect-flash');
+app.use(flash());
+
+// Initialize Passport
+var initPassport = require('./passport/init');
+initPassport(passport);
+
+var admin = require('./routes/admin')(passport);
 
 app.use('/', routes);
 app.use('/users', users);
