@@ -272,3 +272,14 @@ ul.user-details{
     margin-top: 10px;
 }
 /*FIM FORM LOGIN E REGISTER*/
+
+.error{
+    width: 100%;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 5px;
+    text-align: center;
+}

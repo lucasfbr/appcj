@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var connection = require('./models');
 var passport = require('passport');
 var expressSession = require('express-session');
+var hbs = require('hbs')
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
