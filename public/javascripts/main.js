@@ -20,7 +20,7 @@ $(function() {
     $(this).tab('show')
   });
 
-    var alerta = $(".alert-span").text();
+    var alerta = $("#alert-hiden").val();
 
     if(alerta === 'msg'){
 
