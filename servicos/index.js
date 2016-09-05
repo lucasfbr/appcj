@@ -1,8 +1,9 @@
-var nodemailer = require('nodemailer');
+//var nodemailer = require('nodemailer');
 
-var conta = nodemailer.createTransport('smtps://lucasfbr03@gmail.com:info03_lucas01@smtp.gmail.com');
-
+/*
 exports.send = function (req, res) {
+
+    var conta = nodemailer.createTransport('smtps://lucasfbr03@gmail.com:info03_lucas01@smtp.gmail.com');
 
     var objeto = {};
 
@@ -42,5 +43,23 @@ exports.send = function (req, res) {
     }
 
 
+
+}
+*/
+
+
+var sendgrid  = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
+
+exports.send = function (req, res) {
+
+    sendgrid.send({
+        to:       'example@example.com',
+        from:     'other@example.com',
+        subject:  'Hello World',
+        text:     'My first email through SendGrid.'
+    }, function(err, json) {
+        if (err) { return console.error(err); }
+        console.log(json);
+    });
 
 }
