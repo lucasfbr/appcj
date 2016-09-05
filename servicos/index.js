@@ -161,7 +161,8 @@ exports.send = function (req, res) {
 
         if (error) {
             objeto = {
-                msgMail: 'Erro ao enviar o email, tente novamente mais tarde!',
+                //msgMail: 'Erro ao enviar o email, tente novamente mais tarde!',
+                msgMail: error,
                 alert: 'msg'
             };
 
