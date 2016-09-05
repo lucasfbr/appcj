@@ -1,4 +1,4 @@
-//var nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer');
 
 
 exports.send = function (req, res) {
