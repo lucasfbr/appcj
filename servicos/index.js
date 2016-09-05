@@ -77,8 +77,8 @@ exports.send = function (req, res) {
 //header.setUniqueArgs({dad: 'proud'});
 
 // addCategory
-    header.addCategory('tactics');
-    header.addCategory('advanced');
+    header.addCategory('tactics2');
+    header.addCategory('advanced2');
 
 // setCategories
 //header.setCategories(['tactics', 'advanced']);
