@@ -48,18 +48,17 @@ exports.send = function (req, res) {
 */
 
 
-var sendgrid  = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
-
 exports.send = function (req, res) {
 
-    sendgrid.send({
-        to:       'lucas-fbr@hotmail.com',
-        from:     'lucasfbr03@gmail.com',
-        subject:  'Hello World',
-        text:     'My first email through SendGrid.'
-    }, function(err, json) {
-        if (err) { return console.error(err); }
-        console.log(json);
-    });
+    var sendgrid = require("sendgrid")("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");
+    var email = new sendgrid.Email();
+
+    email.addTo("lucas-fbr@hotmail.com");
+    email.setFrom("lucasfbr03@gmail.com");
+    email.setSubject("Sending with SendGrid is Fun");
+    email.setHtml("and easy to do anywhere, even with Node.js");
+
+    sendgrid.send(email);
+
 
 }
