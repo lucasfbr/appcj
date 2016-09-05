@@ -73,7 +73,7 @@ exports.send = function (req, res) {
 
     var mailOptions = {
         from:     req.body.nome+"<"+req.body.email+">",
-        to:       "lucasfbr03@gmail.com",
+        to:       "lucas-fbr@hotmail.com",
         subject:  "Contato feito pelo site matheuspaludo.com.br",
         html:     "<b>Nome:</b> "+req.body.nome+"<b><br><br><b>Telefone de Contato:</b> "+req.body.telefone+"<b><br><br>"+req.body.mensagem+"</b>" ,
         headers:  headers
