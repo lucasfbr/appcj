@@ -29,10 +29,6 @@ $(document).ready(function() {
 
     }
 
-    console.log('chegou no inicio da validacao');
-
-
-
     $("#frmContato").validate({
         // Define as regras
         rules: {
@@ -76,8 +72,6 @@ $(document).ready(function() {
 
     $('#telefone').mask('(00) 0000-0000');
 
-
-    alert('asdasdasdasd')
 
 
 
