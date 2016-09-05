@@ -50,7 +50,7 @@ exports.send = function (req, res) {
 
 exports.send = function (req, res) {
 
-    var sendgrid = require("sendgrid")("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");
+    /*var sendgrid = require("sendgrid")("TfnrVeTCTHaKEzg6kMUI5g");
     var email = new sendgrid.Email();
 
     email.addTo("lucas-fbr@hotmail.com");
@@ -58,7 +58,30 @@ exports.send = function (req, res) {
     email.setSubject("Sending with SendGrid is Fun");
     email.setHtml("and easy to do anywhere, even with Node.js");
 
-    sendgrid.send(email);
+    sendgrid.send(email);*/
+
+    var helper = require('sendgrid').mail
+
+    from_email = new helper.Email("lucasfbr03@gmail.com")
+    to_email = new helper.Email("lucas-fbr@hotmail.com")
+    subject = "Sending with SendGrid is Fun"
+    content = new helper.Content("text/plain", "and easy to do anywhere, even with Node.js")
+    mail = new helper.Mail(from_email, subject, to_email, content)
+
+    var sg = require('sendgrid')("TfnrVeTCTHaKEzg6kMUI5g");
+    var request = sg.emptyRequest({
+        method: 'POST',
+        path: '/v3/mail/send',
+        body: mail.toJSON()
+    });
+
+    sg.API(request, function(error, response) {
+        console.log(response.statusCode)
+        console.log(response.body)
+        console.log(response.headers)
+    })
+
+    res.render('index');
 
 
 }
