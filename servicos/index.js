@@ -74,9 +74,8 @@ exports.send = function (req, res) {
     var mailOptions = {
         from:     "Enviado por: <"+req.body.email+">",
         to:       "lucasfbr03@gmail.com",
-        subject:  "Contato feito pelo matheuspaludo.com.br",
-        text:     "Hello world",
-        html:     "<b>"+req.body.mensagem+"</b> <br /> <b>Telefone de Contato:</b> "+req.body.mensagem,
+        subject:  "Contato feito pelo site matheuspaludo.com.br",
+        html:     "<b>"+req.body.mensagem+"</b> <br /> <b>Telefone de Contato:</b> "+req.body.telefone,
         headers:  headers
     }
 
