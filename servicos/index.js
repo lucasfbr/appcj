@@ -50,6 +50,11 @@ exports.send = function (req, res) {
 
 exports.send = function (req, res) {
 
+
+    var smtpapi = require('../lib/main.js')
+    var nodemailer = require('nodemailer');
+    var header = new smtpapi();
+
     // Send usin Nodemailer
     var headers    = { 'x-smtpapi': header.jsonString() };
 
