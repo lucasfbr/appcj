@@ -1,6 +1,6 @@
 //var nodemailer = require('nodemailer');
 
-/*
+
 exports.send = function (req, res) {
 
     var conta = nodemailer.createTransport('smtps://lucasfbr03@gmail.com:info03_lucas01@smtp.gmail.com');
@@ -45,9 +45,9 @@ exports.send = function (req, res) {
 
 
 }
-*/
 
 
+/*
 exports.send = function (req, res) {
 
     /*var sendgrid = require("sendgrid")("TfnrVeTCTHaKEzg6kMUI5g");
@@ -60,7 +60,7 @@ exports.send = function (req, res) {
 
     sendgrid.send(email);*/
 
-    var helper = require('sendgrid').mail
+   /* var helper = require('sendgrid').mail
 
     from_email = new helper.Email("lucasfbr03@gmail.com")
     to_email = new helper.Email("lucas-fbr@hotmail.com")
@@ -84,4 +84,4 @@ exports.send = function (req, res) {
     res.render('index');
 
 
-}
+}*/
