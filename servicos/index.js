@@ -1,6 +1,6 @@
-var nodemailer = require('nodemailer');
+//var nodemailer = require('nodemailer');
 
-
+/*
 exports.send = function (req, res) {
 
     var conta = nodemailer.createTransport('smtps://lucasfbr03@gmail.com:info03_lucas01@smtp.gmail.com');
@@ -44,44 +44,55 @@ exports.send = function (req, res) {
 
 
 
-}
+}*/
 
 
-/*
+
 exports.send = function (req, res) {
 
-    /*var sendgrid = require("sendgrid")("TfnrVeTCTHaKEzg6kMUI5g");
-    var email = new sendgrid.Email();
+    var objeto = {};
 
-    email.addTo("lucas-fbr@hotmail.com");
-    email.setFrom("lucasfbr03@gmail.com");
-    email.setSubject("Sending with SendGrid is Fun");
-    email.setHtml("and easy to do anywhere, even with Node.js");
+    var helper = require('sendgrid').mail;
+    var from_email = new helper.Email('test@example.com');
+    var to_email = new helper.Email('lucasfbr03@gmail');
+    var subject = 'Hello World from the SendGrid Node.js Library!';
+    var content = new helper.Content('text/plain', 'Hello, Email!');
+    var mail = new helper.Mail(from_email, subject, to_email, content);
 
-    sendgrid.send(email);*/
-
-   /* var helper = require('sendgrid').mail
-
-    from_email = new helper.Email("lucasfbr03@gmail.com")
-    to_email = new helper.Email("lucas-fbr@hotmail.com")
-    subject = "Sending with SendGrid is Fun"
-    content = new helper.Content("text/plain", "and easy to do anywhere, even with Node.js")
-    mail = new helper.Mail(from_email, subject, to_email, content)
-
-    var sg = require('sendgrid')("TfnrVeTCTHaKEzg6kMUI5g");
+    var sg = require('sendgrid')('TfnrVeTCTHaKEzg6kMUI5g');
     var request = sg.emptyRequest({
         method: 'POST',
         path: '/v3/mail/send',
-        body: mail.toJSON()
+        body: mail.toJSON(),
     });
 
     sg.API(request, function(error, response) {
-        console.log(response.statusCode)
-        console.log(response.body)
-        console.log(response.headers)
-    })
 
-    res.render('index');
+        if (error) {
+
+            objeto = {
+                msgMail: 'Erro ao enviar o email, tente novamente mais tarde!',
+                alert: 'msg'
+            };
+
+            console.log('Erro ao enviar o e-mail: '+ error);
+
+        }else {
+
+            objeto = {
+                msgMail: 'Email enviado com sucesso, logo entraremos em contato!',
+                alert: 'msg'
+            };
+        }
 
 
-}*/
+        console.log(response.statusCode);
+        console.log(response.body);
+        console.log(response.headers);
+
+
+        res.render('index', objeto);
+    });
+
+
+}
