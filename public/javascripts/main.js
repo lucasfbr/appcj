@@ -1,7 +1,5 @@
-alert('xxxxxxx')
+$(document).ready(function() {
 
-
-$(function () {
 
 
     $('a[href*=#]:not([href=#])').not(".carousel-control").click(function () {
@@ -23,14 +21,13 @@ $(function () {
         $(this).tab('show')
     });
 
-    var alerta = $("#alert-hiden").val();
 
+    var alerta = $("#alert-hiden").val();
     if (alerta === 'msg') {
 
         $('#myModal').modal('show')
 
     }
-
 
     $("#frmContato").validate({
         // Define as regras
@@ -76,6 +73,7 @@ $(function () {
     $('#telefone').mask('(00) 0000-0000');
 
 
+    alert('asdasdasdasd')
 
 
 
