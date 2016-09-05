@@ -48,7 +48,6 @@
     <!-- Fim Slider da aplicacao -->
 </div>
 
-
 <!-- Servicos -->
 <section id="servicos">
     <div class="container">
@@ -215,7 +214,6 @@
         </div>
 
 
-
     </div>
 </section>
 <!-- FimQuem somos -->
@@ -286,7 +284,7 @@
 <!-- Fim Localizacao -->
 
 <!-- Contato -->
-<section id="contato" class="div_colorida">
+<section id="contato" class="div_colorida" ng-controller="inicialController">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
@@ -307,13 +305,14 @@
         </div>
 
         <div class="row">
+
             <div class="col-xs-12">
-                <form name="frmContato" id="frmContato" action="/contato">
+                <form name="frmContato" id="frmContato" action="/sendMail" method="POST">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <input type="text" class="form-control input-lg" name="nome" id="nome"
-                                       placeholder="Qual é seu nome?" required>
+                                       placeholder="Qual é seu nome?" required minlength="2">
                             </div>
 
                             <div class="form-group">
@@ -322,22 +321,18 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="telefon" id="telefonr"
+                                <input type="text" class="form-control input-lg" name="telefone" id="telefone"
                                        placeholder="Qual o seu telefone?" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group contato">
-                                <textarea class="form-control input-lg" name="mensagem" id="mensagem"
+                                <textarea class="form-control input-lg" rows="6" name="mensagem" id="mensagem"
                                           placeholder="Sua mensagem!" required></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="alert alert-success envio-realizado">Envio realizado</div>
-                            <div class="alert alert-danger envio-nao-realizado">Envio não realizado, tente novamente mais tarde</div>
-                        </div>
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-default btn-lg">Enviar Formulário</button>
                         </div>
@@ -346,6 +341,26 @@
             </div>
         </div>
     </div>
+
+    <input type="hidden" name="alert-hiden" id="alert-hiden" value="{{alert}}">
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><strong>Formulário de Contato</strong></h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{msgMail}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
 </section>
 <!-- Fim Contato -->
 

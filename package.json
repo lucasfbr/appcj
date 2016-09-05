@@ -24,6 +24,8 @@
     "connect-flash": "~0.1.1",
     "mysql": "~2.11.1",
     "pg": "~6.1.0",
-    "pg-hstore": "~2.3.2"
+    "pg-hstore": "~2.3.2",
+    "sendgrid": "~4.0.2",
+    "smtpapi": "~1.2.0"
   }
 }
