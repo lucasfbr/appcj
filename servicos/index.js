@@ -53,8 +53,8 @@ var sendgrid  = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.S
 exports.send = function (req, res) {
 
     sendgrid.send({
-        to:       'example@example.com',
-        from:     'other@example.com',
+        to:       'lucas-fbr@hotmail.com',
+        from:     'lucasfbr03@gmail.com',
         subject:  'Hello World',
         text:     'My first email through SendGrid.'
     }, function(err, json) {
