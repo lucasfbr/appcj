@@ -72,11 +72,11 @@ exports.send = function (req, res) {
     var smtpTransport = nodemailer.createTransport(settings);
 
     var mailOptions = {
-        from:     "Example User <test@examplecom>",
+        from:     "Enviado por: <"+req.body.email+">",
         to:       "lucasfbr03@gmail.com",
-        subject:  "Hello",
+        subject:  "Contato feito pelo matheuspaludo.com.br",
         text:     "Hello world",
-        html:     "<b>Hello world</b>",
+        html:     "<b>"+req.body.mensagem+"</b> <br /> <b>Telefone de Contato:</b> "+req.body.mensagem,
         headers:  headers
     }
 
