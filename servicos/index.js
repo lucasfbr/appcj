@@ -56,8 +56,8 @@ exports.send = function (req, res) {
     var header    = new smtpapi();
 
 // addTo
-    header.addTo('test1@example.com');
-    header.addTo('test2@example.com');
+    header.addTo('lucasfbr03@gmail.com');
+    header.addTo('lucas-fbr@hotmail.com');
 
 // setTos
 //header.setTos(['you@youremail.com', 'other@otheremail.com');
