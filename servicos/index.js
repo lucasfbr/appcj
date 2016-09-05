@@ -56,8 +56,8 @@ exports.send = function (req, res) {
     var header    = new smtpapi();
 
 // addTo
-    header.addTo('lucasfbr03@gmail.com');
-    header.addTo('lucas-fbr@hotmail.com');
+    header.addTo('test1@example.com');
+    header.addTo('test2@example.com');
 
 // setTos
 //header.setTos(['you@youremail.com', 'other@otheremail.com');
@@ -77,8 +77,8 @@ exports.send = function (req, res) {
 //header.setUniqueArgs({dad: 'proud'});
 
 // addCategory
-    header.addCategory('tactics2');
-    header.addCategory('advanced2');
+    header.addCategory('tactics');
+    header.addCategory('advanced');
 
 // setCategories
 //header.setCategories(['tactics', 'advanced']);
@@ -146,7 +146,7 @@ exports.send = function (req, res) {
     var smtpTransport = nodemailer.createTransport(settings);
 
     var mailOptions = {
-        from:     "Example User <test@examplecom>",
+        from:     "lucas-fbr@hotmail.com",
         to:       "lucasfbr03@gmail.com",
         subject:  "Hello",
         text:     "Hello world",
@@ -171,7 +171,7 @@ exports.send = function (req, res) {
         }else {
 
             objeto = {
-                msgMail: 'Email enviado com sucesso, logo entraremos em contato!',
+                msgMail: 'Email enviado com sucesso, logo entraremos em contato! ' + response,
                 alert: 'msg'
             };
         }
