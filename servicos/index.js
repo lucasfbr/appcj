@@ -139,8 +139,8 @@ exports.send = function (req, res) {
         port: parseInt(587, 10),
         requiresAuth: true,
         auth: {
-            user: process.env.SENDGRID_USERNAME,
-            pass: process.env.SENDGRID_PASSWORD
+            user: 'app55826511@heroku.com',
+            pass: 'u7y02inx6736'
         }
     };
     var smtpTransport = nodemailer.createTransport(settings);
