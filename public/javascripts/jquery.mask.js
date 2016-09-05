@@ -34,6 +34,7 @@
 /* jshint laxbreak: true */
 /* global define */
 
+
 'use strict';
 
 // UMD (Universal Module Definition) patterns for JavaScript modules that work everywhere.
