@@ -29,6 +29,8 @@
                 </div>
             </div>
 
+            {{#if user.admin}}
+
             <div class="panel panel-default panel-admin">
                 <div id="colGroup2" role="tab" class="panel-heading">
                     <h4 class="panel-title">
@@ -144,6 +146,8 @@
                 </div>
             </div>
 
+                {{/if}}
+
             <!-- Fim do menu de navegacao lateral -->
         </div>
         <div class="col-md-9">
@@ -158,6 +162,7 @@
 
                     <div class="well well-sm">
                         <h2>Seja bem vindo {{user.firstname}} {{user.lastname}}</h2>
+                        <h3>{{user.type}}</h3>
                         <p>Utilize o menu ao lado para navegar pelo painel administrativo</p>
                     </div>
 

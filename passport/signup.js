@@ -31,7 +31,9 @@ module.exports = function (passport) {
                                     password: createHash(password),
                                     email: req.param('email'),
                                     firstname: req.param('firstName'),
-                                    lastname: req.param('lastName')
+                                    lastname: req.param('lastName'),
+                                    admin: false,
+                                    status: true
                                 })
                                     .then(function (newUser) {
                                         console.log('Usuario registrado com sucesso');

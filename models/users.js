@@ -4,7 +4,9 @@ module.exports = function (sequelize, Sequelize) {
         password : Sequelize.STRING,
         email    : Sequelize.STRING,
         firstname: Sequelize.STRING,
-        lastname : Sequelize.STRING
+        lastname : Sequelize.STRING,
+        admin    : Sequelize.BOOLEAN, //true = administrador, false = usuario comum
+        status   : Sequelize.BOOLEAN  //true usuario habilitado, false = usuario deshabilitado
     });
 
     return Users;
