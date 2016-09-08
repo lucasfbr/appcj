@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-
-
     $('a[href*=#]:not([href=#])').not(".carousel-control").click(function () {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
             var target = $(this.hash);

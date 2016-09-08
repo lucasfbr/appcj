@@ -1,0 +1,19 @@
+extends layout_login
+
+block content
+    .container
+        .row
+            .col-sm-6.col-md-4.col-md-offset-4
+                h1.text-center.login-title Entre com seu login e senha
+                    .account-wall
+                        img.profile-img(src='')
+                        form.form-signin(action='/admin', method='POST')
+                            input.form-control(type='text', name='username', placeholder='Usuário', required='', autofocus='')
+                            input.form-control(type='password', name='password', placeholder='Senha', required='')
+                            button.btn.btn-lg.btn-primary.btn-block(type='submit') Entrar
+                            span.clearfix
+                    if message != ''
+                        .alert.alert-danger.alert-login(role='alert') #{message}
+
+                    a.text-center.new-account(href='/admin/signup') Crie uma nova Conta
+     

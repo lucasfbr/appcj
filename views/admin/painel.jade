@@ -1,0 +1,82 @@
+extends ../layout_painel
+
+block content
+    .container-fluid
+        .row-fluid
+            .col-sm-3
+                // Inicio do menu de navegacao lateral
+                .panel.panel-default.panel-admin
+                    #colGroup1.panel-heading(role='tab')
+                        h4.panel-title
+                            a(data-toggle='collapse', data-target='#colListGroup1', aria-expanded='false', aria-controls='collapseExample')
+                                span.glyphicon.glyphicon-user Gerenciar Usuarios
+                    #colListGroup1.panel-collapse.collapse(role='tabpanel', aria-expanded='false')
+                        ul.list-group
+                            li.list-group-item
+                                a(href='') Chat
+                            li.list-group-item
+                                a(href='') Home
+                            li.list-group-item
+                                a(href='') Portifolio
+                            li.list-group-item
+                                a(href='') Servicos
+                            li.list-group-item
+                                a(href='') Quem Somos
+                        .panel-footer
+                .panel.panel-default.panel-admin
+                    #colGroup2.panel-heading(role='tab')
+                        h4.panel-title
+                            a(data-toggle='collapse', data-target='#colListGroup2', aria-expanded='false', aria-controls='collapseExample')
+                                span.glyphicon.glyphicon-wrench Gerenciar Servicos
+                    #colListGroup2.panel-collapse.collapse(role='tabpanel', aria-expanded='false')
+                        ul.list-group
+                            li.list-group-item
+                                a(href='') Chat
+                            li.list-group-item
+                                a(href='') Home
+                            li.list-group-item
+                                a(href='') Portifolio
+                            li.list-group-item
+                                a(href='') Servicos
+                            li.list-group-item
+                                a(href='') Quem Somos
+                        .panel-footer
+            .col-md-9
+                .estilo_painel
+                    .estilo_painel_int
+                        ul.nav.nav-pills
+                            li
+                                a(href='') Mensagens
+                                    span.badge 10
+                            li
+                                a(href='') Tarefas
+                                    span.badge 2
+                            li
+                                a(href='') Aniversariantes
+                                    span.badge 1
+                        .well.well-sm
+                            h2 Seja bem vindo #{user.firstname} #{user.lastname}
+                            h3 #{user.type}
+                            p Utilize o menu ao lado para navegar pelo painel administrativo
+                        .row
+                            .col-sm-4
+                                h4 Ultimos artigos
+                                ul
+                                    li Artigo 1
+                                    li Artigo 2
+                                    li Artigo 3
+                                a.btn.btn-primary.btn-block(href='') Novo artigo
+                            .col-sm-4
+                                h4 Ultimos acessos
+                                ul
+                                    li Acesso 1
+                                    li Acesso 2
+                                    li Acesso 3
+                                a.btn.btn-primary.btn-block(href='') Novo acesso
+                            .col-sm-4
+                                h4 Ultimos Posts
+                                ul
+                                    li Post 1
+                                    li Post 2
+                                    li Post 3
+                                a.btn.btn-primary.btn-block(href='') Novo post

@@ -1,0 +1,212 @@
+extends layout
+
+block content
+    .divslider
+        #sliderprincipal.carousel.slide(data-ride='carousel')
+            ol.carousel-indicators
+                li.active(data-target='#sliderprincipal', data-slide-to='0')
+                li(data-target='#sliderprincipal', data-slide-to='1')
+                li(data-target='#sliderprincipal', data-slide-to='2')
+            // Wrapper for slides
+            .carousel-inner(role='listbox')
+                .item.active
+                    img.img-responsive(src='/images/sliders/foto1.jpg', alt='...')
+                    .carousel-caption
+                        h3 Foto 1
+                        p Descricao da foto
+                .item
+                    img.img-responsive(src='/images/sliders/foto2.jpg', alt='...')
+                    .carousel-caption
+                        h3 Foto 2
+                        p Descricao da foto
+                .item
+                    img.img-responsive(src='/images/sliders/foto3.jpg', alt='...')
+                    .carousel-caption
+                        h3 Foto 3
+                        p Descricao da foto
+            // Controls
+            a.left.carousel-control(href='#sliderprincipal', role='button', data-slide='prev')
+                span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+                span.sr-only Previous
+            a.right.carousel-control(href='#sliderprincipal', role='button', data-slide='next')
+                span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+                span.sr-only Next
+        // Fim Slider da aplicacao
+    // Servicos
+    section#servicos
+        .container
+            .row
+                .col-xs-12
+                    .page-header
+                        h1 Servicos
+                            small conheca oque fazemos
+            .row
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3.servicos_item
+                    div
+                        img.img-responsive.img-circle(src='/images/civel.jpg')
+                    h4 Direito Civil
+                    p descricao do servico apresentado. texto texto texto texto texto texto
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3.servicos_item
+                    div
+                        img.img-responsive.img-circle(src='/images/penal.png')
+                    h4 Direito Penal
+                    p descricao do servico apresentado. texto texto texto texto texto texto
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3.servicos_item
+                    div
+                        img.img-responsive.img-circle(src='/images/trabalho.jpg')
+                    h4 Direito do Trabalho
+                    p descricao do servico apresentado. texto texto texto texto texto texto
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3.servicos_item
+                    div
+                        img.img-responsive.img-circle(src='/images/consumidor.png')
+                    h4 Direito do Consumidor
+                    p descricao do servico apresentado. texto texto texto texto texto texto
+            .row
+                .col-xs-12.text-center.btn-todos
+                    a.btn.btn-default.btn-lg(href='/servicos') Veja todos nossos servicos
+    // Fim Servicos
+    // Portifolio
+    section#portifolio.div_colorida
+        .container
+            .row
+                .col-xs-12
+                    .page-header
+                        h1 Portifolio
+                            small conheca nossos trabalhos
+            .row.portifolio-row
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3
+                    .portifolio_item
+                        div
+                            img.img-responsive.grayscale(src='/images/foto2.jpg')
+                        h4 Agrale
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3
+                    .portifolio_item
+                        div
+                            img.img-responsive.grayscale(src='/images/foto2.jpg')
+                        h4 Azal&eacute;ia
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3
+                    .portifolio_item
+                        div
+                            img.img-responsive.grayscale(src='/images/foto2.jpg')
+                        h4 Gerdau
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3
+                    .portifolio_item
+                        div
+                            img.img-responsive.grayscale(src='/images/foto2.jpg')
+                        h4 Grendene
+            .row
+                .col-xs-12.text-center.btn-todos
+                    a.btn.btn-default.btn-lg(href='/portifolio') Veja o portifolio completo
+    // Fim Portifolio
+    // Quem somos
+    section#quemsomos
+        .container
+            .row
+                .col-xs-12
+                    .page-header
+                        h1 Quem Somos
+                            small conheca nossa historia
+            .row
+                .col-xs-12.col-sm-12.col-md-6.row-quemSomos
+                    .col-sm-8.text-right
+                        h4 Texto sobre a empresa
+                        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat, orci id volutpat varius, odio nulla condimentum mauris, in pharetra purus neque ac magna. Praesent consectetur ex eget hendrerit vehicula. Mauris sit amet metus et mi suscipit aliquam ac in nibh. In euismod urna nec lectus.
+                        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat, orci id volutpat varius, odio nulla condimentum mauris, in pharetra purus neque ac magna. Praesent consectetur ex eget hendrerit vehicula. Mauris sit amet metus et mi suscipit aliquam ac in nibh. In euismod urna nec lectus.
+                    .col-sm-4
+                        img.img-responsive.img-rounded.quemSomos-img(src='/images/foto.jpg')
+                .col-xs-12.col-sm-12.col-md-6
+                    .col-sm-4
+                        img.img-responsive.img-rounded.quemSomos-img(src='/images/foto.jpg')
+                    .col-sm-8.text-left
+                        h4 Miss&atilde;o da empresa
+                        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat, orci id volutpat varius, odio nulla condimentum mauris, in pharetra purus neque ac magna. Praesent consectetur ex eget hendrerit vehicula. Mauris sit amet metus et mi suscipit aliquam ac in nibh. In euismod urna nec lectus.
+                        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat, orci id volutpat varius, odio nulla condimentum mauris, in pharetra purus neque ac magna. Praesent consectetur ex eget hendrerit vehicula. Mauris sit amet metus et mi suscipit aliquam ac in nibh. In euismod urna nec lectus.
+            .row
+                .col-xs-12.text-center.btn-todos
+                    a.btn.btn-default.btn-lg(href='/quemsomos') Veja mais
+    // FimQuem somos
+    // Nossa equipe
+    section#nossa-equipe.div_colorida
+        .container
+            .row
+                .col-xs-12
+                    .page-header
+                        h1 Nossa Equipe
+                            small conhe&ccedil;a nossos colaboradores
+            .row.nossaEquipe-item
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3.servicos_item
+                    div
+                        img.img-responsive.img-circle(src='/images/foto.jpg')
+                    h4 Colaborador 1
+                    p Breve descri&atilde;&ccedil;o do colaborador.
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3.servicos_item
+                    div
+                        img.img-responsive.img-circle(src='/images/foto.jpg')
+                    h4 Colaborador 2
+                    p Breve descri&atilde;&ccedil;o do colaborador.
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3.servicos_item
+                    div
+                        img.img-responsive.img-circle(src='/images/foto.jpg')
+                    h4 Colaborador 3
+                    p Breve descri&atilde;&ccedil;o do colaborador.
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3.servicos_item
+                    div
+                        img.img-responsive.img-circle(src='/images/foto.jpg')
+                    h4 Colaborador 4
+                    p Breve descri&atilde;&ccedil;o do colaborador.
+    // Fim nossa equipe
+    // Localizacao
+    section#localizacao
+        .container
+            .row
+                .col-xs-12
+                    .page-header
+                        h1 Localizacao
+                            small veja onde estamos
+            .row
+                .col-xs-12
+                    iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1037.8085226721903!2d-51.15935127075266!3d-30.03356683783013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95197795847e9b75%3A0xdef6118e72f8063b!2sR.+S%C3%A3o+Leopoldo%2C+429+-+Vila+Jardim%2C+Porto+Alegre+-+RS%2C+91330-690!5e1!3m2!1spt-BR!2sbr!4v1470322356006', width='100%', height='400', frameborder='0', style='border:0', allowfullscreen='')
+    // Fim Localizacao
+    // Contato
+    section#contato.div_colorida
+        .container
+            .row
+                .col-xs-12
+                    .page-header
+                        h1 Contato
+                            small mande suas duvidas
+            .row.contato
+                .col-xs-12
+                    p.bg-success.aviso Preencha o formul&aacute;rio abaixo para entrar em contato conosco!
+            .row
+                .col-xs-12
+                    form#frmContato(name='frmContato', action='/sendMail', method='POST')
+                        .row
+                            .col-md-6
+                                .form-group
+                                    input#nome.form-control.input-lg(type='text', name='nome', placeholder='Qual é seu nome?', required='', minlength='2')
+                                .form-group
+                                    input#email.form-control.input-lg(type='text', name='email', placeholder='Qual o seu email?', required='')
+                                .form-group
+                                    input#telefone.form-control.input-lg(type='text', name='telefone', placeholder='Qual o seu telefone?', required='')
+                            .col-md-6
+                                .form-group.contato
+                                    textarea#mensagem.form-control.input-lg(rows='6', name='mensagem', placeholder='Sua mensagem!', required='')
+                        .row
+                            .col-md-12
+                                button.btn.btn-default.btn-lg(type='submit') Enviar Formul&aacute;rio
+        input#alert-hiden(type='hidden', name='alert-hiden', value='{alert}')
+        #myModal.modal.fade(tabindex='-1', role='dialog')
+            .modal-dialog(role='document')
+                .modal-content
+                    .modal-header
+                        button.close(type='button', data-dismiss='modal', aria-label='Close')
+                            span(aria-hidden='true') &times;
+                        h4.modal-title
+                            strong Formul&aacute;rio de Contato
+                    .modal-body
+                        p {msgMail}
+                    .modal-footer
+                        button.btn.btn-default(type='button', data-dismiss='modal') Fechar
+
+

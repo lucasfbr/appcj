@@ -17,8 +17,7 @@ module.exports = function(passport){
   router.get('/', function(req, res) {
     // Display the Login page with any flash message, if any
     res.render('login', {
-      message: req.flash('message'),
-      layout: 'layout_login'
+      message: req.flash('message')
     });
   });
 
@@ -33,7 +32,6 @@ module.exports = function(passport){
   router.get('/signup', function(req, res){
     res.render('register',{
       message: req.flash('message'),
-      layout: 'layout_login'
     });
   });
 
@@ -47,7 +45,6 @@ module.exports = function(passport){
   router.get('/painel', isAuthenticated, function(req, res){
     res.render('admin/painel', {
       user: req.user,
-      layout: 'layout_painel'
     });
   });
 
