@@ -1,0 +1,55 @@
+extends ../layout_painel
+block content
+    .content-wrapper
+        // Content Header (Page header)
+        section.content-header
+            h1 Redes Sociais
+                small Administração das suas redes sociais
+            ol.breadcrumb
+                li
+                    a(href='#')
+                        i.fa.fa-dashboard
+                        | Home
+                li.active Redes Sociais
+            // Main content
+            section.content
+                // cadastro box
+                .box
+                    .box-header.with-border
+                        h3.box-title Cadastro
+                    .box-body
+                        .row
+                            .col-md-6
+                                // Horizontal Form
+                                .box.box-success
+                                    .box-header.with-border
+                                        h3.box-title Redes Sociais
+                                    // /.box-header
+                                    // form start
+                                    form.form-horizontal(action="/admin/redesSociais", method="post" enctype="multipart/form-data")
+                                        .box-body
+                                            .form-group
+                                                label.col-sm-2.control-label(for='nome') Nome
+                                                .col-sm-10
+                                                    input#nome.form-control(name="nome" type='text', placeholder='Nome')
+                                            .form-group
+                                                label.col-sm-2.control-label(for='link') Link
+                                                .col-sm-10
+                                                    input#link.form-control(name="link" type='text', placeholder='link da rede social!')
+                                            .form-group
+                                                label.col-sm-2.control-label(for='imagem') Imagem
+                                                .col-sm-10
+                                                    input#imagem.form-control(name="imagem" type='file', placeholder='imagem!')
+                                        // /.box-body
+                                        .box-footer
+                                            button.btn.btn-default(type='submit') Cancelar
+                                            button.btn.btn-danger.pull-right(type='submit') Cadastrar
+                                        // /.box-foote
+                            .col-md-6
+                                .box.box-info
+                                    .box-header.with-border
+                                        h3.box-title Ajuda
+                                    .box-body
+                                        p
+                                            |Inclua novas redes sociais, bem como seus logotipos e links de redirecionamento.
+                                            |Tamanho maximo de cada logotipo 64x64

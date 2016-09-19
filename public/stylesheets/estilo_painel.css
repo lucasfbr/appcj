@@ -1,15 +1,16 @@
-body{
-    background: url(../images/bgOld_moon.png);
-    padding-top: 80px;
+.botaoAddSocial{
+    margin-bottom: 10px !important;
+}
+.tabela_cabecalho{
+    background: #1b6d85;
+    color:#fff;
 }
 
-.estilo_painel{
-    background: #fff;
-    border-radius: 8px;
-    border: 1px solid #eee;
-    box-shadow: 5px 5px 5px #888;
+.btnEditar{
+    float: left;
+    margin-right: 4px;
 }
 
-.estilo_painel_int{
-    padding: 10px;
+.formExcluir{
+    float: left;
 }

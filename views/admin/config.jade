@@ -1,0 +1,104 @@
+extends ../layout_painel
+block content
+    .content-wrapper
+        // Content Header (Page header)
+        section.content-header
+            h1 Configurações Iniciais
+                small configurações ncessárias para o perfeito funcionamento do sistema
+            ol.breadcrumb
+                li
+                    a(href='#')
+                        i.fa.fa-dashboard
+                        | Home
+                li.active Configurações
+            // Main content
+            section.content
+                // Default box
+                .box
+                    .box-header.with-border
+                        h3.box-title Cadastro
+                        .box-tools.pull-right
+                            button.btn.btn-box-tool(type='button', data-widget='collapse', data-toggle='tooltip', title='Collapse')
+                                i.fa.fa-minus
+                            button.btn.btn-box-tool(type='button', data-widget='remove', data-toggle='tooltip', title='Remove')
+                                i.fa.fa-times
+                    .box-body
+                        .row
+                            .col-md-6
+                                // Horizontal Form
+                                .box.box-success
+                                    .box-header.with-border
+                                        h3.box-title Informações da empresa
+                                    // /.box-header
+                                    // form start
+                                    form.form-horizontal(name="config", method="POST", action="/admin/config/" + dados.id, enctype="multipart/form-data")
+                                        input(type="hidden", name="_method", value="PUT")
+                                        .box-body
+                                            .form-group
+                                                label.col-sm-2.control-label(for='nomeEmpresa') Nome da Empresa
+                                                .col-sm-10
+                                                    input#nomeEmpresa.form-control(type='text', name="nomeEmpresa" value="#{dados.nomeEmpresa}")
+                                            .form-group
+                                                label.col-sm-2.control-label(for='logotipo') Logotipo
+                                                .col-sm-10
+                                                    input#logotipo.form-control(type='file', name="logotipo", value="#{dados.logotipo}")
+                                            .form-group
+                                                label.col-sm-2.control-label(for='estado') Estado
+                                                .col-sm-10
+                                                    input#estado.form-control(type='text', name="estado", value="#{dados.estado}")
+                                            .form-group
+                                                label.col-sm-2.control-label(for='cidade') Cidade
+                                                .col-sm-10
+                                                    input#cidade.form-control(type='text', name="cidade", value="#{dados.cidade}")
+                                            .form-group
+                                                label.col-sm-2.control-label(for='bairro') Bairro
+                                                .col-sm-10
+                                                    input#bairro.form-control(type='text', name="bairro", value="#{dados.bairro}")
+                                            .form-group
+                                                label.col-sm-2.control-label(for='endereco') Endereço
+                                                .col-sm-10
+                                                    input#endereco.form-control(type='text', name="endereco", value="#{dados.endereco}")
+                                            .form-group
+                                                label.col-sm-2.control-label(for='numero') Numero
+                                                .col-sm-10
+                                                    input#numero.form-control(type='text', name="numero", value="#{dados.numero}")
+                                            .form-group
+                                                label.col-sm-2.control-label(for='email') E-mail de contato
+                                                .col-sm-10
+                                                    input#email.form-control(type='text', name="email" value="#{dados.email}")
+                                            .form-group
+                                                label.col-sm-2.control-label(for='usuarioPagSeguro') Usuário do Pagseguro
+                                                .col-sm-10
+                                                    input#usuarioPagSeguro.form-control(type='text', name="usuarioPagseguro", value="#{dados.usuarioPagseguro}")
+                                            .form-group
+                                                label.col-sm-2.control-label(for='senhaPagSeguro') Senha do Pagseguro
+                                                .col-sm-10
+                                                    input#senhaPagSeguro.form-control(type='password', name="senhaPagseguro", value="#{dados.senhaPagseguro}")
+                                            .form-group
+                                                label.col-sm-2.control-label(for='keyPagseguro') ApiKey do PagSeguro
+                                                .col-sm-10
+                                                    input#keyPagseguro.form-control(type='text', name="keyPagseguro", value="#{dados.keyPagseguro}")
+                                        // /.box-body
+                                        .box-footer
+                                            button.btn.btn-default(type='submit') Cancel
+                                            button.btn.btn-info.pull-right(type='submit') Registrar
+                                    // /.box-footer
+                                // /.box
+                            .col-md-6
+                                .box.box-info
+                                    .box-header.with-border
+                                        h3.box-title Ajuda
+                                    .box-body
+                                        p
+                                            | Com estas informações o sistema poderá exibir seu endereço no rodapé do site, bem como enviar e-mails de contato através do formulário
+                                            | de contato. Também são solicitadas suas credênciais do PagSeguro para poder cobrar dos clientes suas consultorias pelo chat, qualquer dúvida
+                                            | acesse:
+                                            a(href='http://www.pagseguro.com.br') PagSeguro
+
+                    // /.box-body
+                    .box-footer
+                        | Footer
+                    // /.box-footer
+                // /.box
+            // /.content
+

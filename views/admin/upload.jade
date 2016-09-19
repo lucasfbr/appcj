@@ -1,0 +1,7 @@
+extends ../layout
+
+block content
+    form(action='/admin/upload', method='post' enctype="multipart/form-data")
+        input(name='image', type='file')
+        input(type='submit')
+

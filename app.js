@@ -7,12 +7,15 @@ var bodyParser = require('body-parser');
 var connection = require('./models');
 var passport = require('passport');
 var expressSession = require('express-session');
+var methodOverride = require('method-override');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var servicos = require('./routes/servicos');
 var portifolio = require('./routes/portifolio');
 var quemsomos = require('./routes/quemsomos');
+var upload = require('./routes/upload');
+
 
 var app = express();
 
@@ -25,6 +28,14 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride(function(req, res){
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    // look in urlencoded POST bodies and delete it
+    var method = req.body._method
+    delete req.body._method
+    return method
+  }
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -42,14 +53,15 @@ app.use(flash());
 var initPassport = require('./passport/init');
 initPassport(passport);
 
-var admin = require('./routes/admin')(passport);
+var admin = require('./routes/admin/index')(passport);
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/servicos', servicos);
 app.use('/portifolio', portifolio);
 app.use('/quemsomos', quemsomos);
-app.use('/admin', admin);
+app.use('/upload', upload);
+app.use('/admin/', admin);
 
 
 // catch 404 and forward to error handler

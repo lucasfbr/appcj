@@ -1,0 +1,53 @@
+extends ../layout_painel
+block content
+    .content-wrapper(ng-controller="redeSocialController")
+        // Content Header (Page header)
+        section.content-header
+            h1 Redes Sociais
+                small Administração das suas redes sociais
+            ol.breadcrumb
+                li
+                    a(href='#')
+                        i.fa.fa-dashboard
+                        | Home
+                li.active Redes Sociais
+            // Main content
+            section.content
+                // cadastro box
+                .box
+                    .box-header.with-border
+                        h3.box-title Listagem
+                    .box-body
+                        .row
+                            .col-md-12
+                                a.btn.btn-success.botaoAddSocial(href="/admin/redesSociais/new")
+                                    span.glyphicon.glyphicon-plus
+                                    &nbsp;
+                                    |Adicionar Rede Social
+                                table.table.table-responsive.table-striped.table-bordered.table-hover
+                                    thead.tabela_cabecalho
+                                        tr
+                                            th Logo
+                                            th Nome
+                                            th Link
+                                            th Status
+                                            th Ações
+                                    tbody
+                                        each val in redesSociais
+                                            tr
+                                                td= val.imagem
+                                                td= val.nome
+                                                td= val.link
+                                                td= val.status
+                                                td
+                                                    a.btn.btn-warning.btnEditar(href="/admin/redesSociais/edit/#{val.id}")
+                                                        span.glyphicon.glyphicon-pencil
+                                                        &nbsp;
+                                                        |Editar
+                                                    &nbsp;
+                                                    form(action='/admin/redesSociais/#{val.id}', method='post', class="formExcluir")
+                                                        input(type='hidden', name='_method', value='DELETE')
+                                                        button.btn.btn-danger(type='submit')
+                                                            span.glyphicon.glyphicon-remove
+                                                            &nbsp;
+                                                            |Excluir
