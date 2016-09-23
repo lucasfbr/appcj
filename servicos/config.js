@@ -1,7 +1,7 @@
 var db = require('../models');
-var fs = require('fs');
-var im = require('imagemagick');
-var path = require('path');
+var formidable = require('formidable');
+var imagens = require('../servicos/imagens');
+
 
 exports.edit = function (req, res) {
 
@@ -21,45 +21,51 @@ exports.edit = function (req, res) {
 
 exports.update = function (req, res) {
 
-    /*INICIO UPLOAD DE IMAGEM*/
-    //if (req.files) {
+    var img_old;
+    var resultUpload;
+    var form = new formidable.IncomingForm();
 
-        console.log('path -> '+req.files.logotipo.path); //form fields
+    form.parse(req, function (err, fields, files) {
 
-        console.log('File -> '+req.files.logotipo.name); //form files
+        db.ConfigBasicas
+            .findById(req.params.id)
+            .then(function (result) {
+                console.log('imagem que deve ser removida do banco e da pasta : ' + result.imagem);
 
-        console.log('endereco -> '+ "./public/images/uploads/fullsize/");
+                //service responsavel por fazer a remoção da imagem antiga do diretorio, caso exista
+                //imagens.remove(result.imagem);
 
-        var imagem;
+                return db.ConfigBasicas.update({
+                    nomeEmpresa     : fields.nomeEmpresa,
+                    email           : fields.email,
+                    estado          : fields.estado,
+                    cidade          : fields.cidade,
+                    bairro          : fields.bairro,
+                    endereco        : fields.endereco,
+                    numero          : fields.numero,
+                    telefone        : fields.telefone,
+                    endGoogleMaps   : fields.endGoogleMaps,
+                    emailContato    : fields.email,
+                    usuarioPagseguro: fields.usuarioPagseguro,
+                    senhaPagseguro  : fields.senhaPagseguro,
+                    keyPagseguro    : fields.keyPagseguro
+                }, {
+                    where: {id: req.params.id}
+                })
 
-        imagem = req.files.sampleFile;
+            })
+            .then(function () {
+                //upload: funcao responsavel por fazer upload de imagens
+                //para um correto funcionamento deve ser enviado o "req" e o "res"
+                //resultUpload = imagens.upload(req, res, files);
 
-        imagem.mv('./images/uploads/', function(err) {
-            if (err) {
-                res.status(500).send(err);
-                console.log('Erro ao fazer upload de imagem: ' + err);
-            }
-            else {
-                console.log('File uploaded!');
                 res.redirect('/admin/config/edit/1');
-            }
-        });
 
+            })
+            .catch(function (err) {
+                console.log('Erro ao atualizar base de dados');
+                console.log('Erro => ' + err);
+            })
 
-
-    //}
-    /*FIM UPLOAD DE IMAGEM*/
-
-    /*db.ConfigBasicas
-        .update(req.body, { where : { id : req.params.id } })
-        .then(function (result) {
-            res.redirect('/admin/config/edit/1');
-
-        })
-        .catch(function (err) {
-            console.log('Erro ao consultar a tabela ConfigBasicas => ' + err);
-
-        })*/
-
-
+    })
 }

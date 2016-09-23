@@ -1,4 +1,7 @@
 var db = require('../models');
+var formidable = require('formidable');
+var imagens = require('../servicos/imagens');
+
 
 exports.findAll = function (req, res) {
 
@@ -34,62 +37,44 @@ exports.edit = function (req, res) {
 
 exports.update = function (req, res) {
 
-
+    var img_old;
+    var resultUpload;
     var form = new formidable.IncomingForm();
 
-    form.parse(req, function(err, fields, files) {
-
-        var image = files.image
-            , image_upload_path_old = image.path
-            , image_upload_path_new = './public/images/uploads'
-            , image_upload_name = image.name
-            , image_upload_path_name = image_upload_path_new + image_upload_name
-            ;
-
-        if (fs.existsSync(image_upload_path_new)) {
-            fs.rename(
-                image_upload_path_old,
-                image_upload_path_name,
-                function (err) {
-                    if (err) {
-                        console.log('Err: ', err);
-                        res.end('Erro ao mover a imagem!');
-                    }
-                    var msg = 'Imagem ' + image_upload_name + ' salva em: ' + image_upload_path_new;
-                    console.log(msg);
-                    res.end(msg);
-                });
-        }
-        else {
-            fs.mkdir(image_upload_path_new, function (err) {
-                if (err) {
-                    console.log('Err: ', err);
-                    res.end('Erro ao criar o diretório!');
-                }
-                fs.rename(
-                    image_upload_path_old,
-                    image_upload_path_name,
-                    function(err) {
-                        var msg = 'Imagem ' + image_upload_name + ' salva em: ' + image_upload_path_new;
-                        console.log(msg);
-                        res.end(msg);
-                    });
-            });
-        }
-    });
+    form.parse(req, function (err, fields, files) {
 
 
-/*
-    db.RedesSociais
-        .update(req.body, { where : { id : req.params.id } })
-        .then(function (result) {
-            res.redirect('/admin/redesSociais');
+        db.RedesSociais
+            .findById(req.params.id)
+            .then(function (result) {
+                console.log('imagem que deve ser removida do banco e da pasta : ' + result.imagem);
 
-        })
-        .catch(function (err) {
-            console.log('Erro ao consultar a tabela Redes Sociais => ' + err);
+                //service responsavel por fazer a remoção da imagem antiga do diretorio, caso exista
+                imagens.remove(result.imagem);
 
-        })*/
+                return db.RedesSociais.update({
+                    nome: fields.nome,
+                    link: fields.link,
+                    imagem: files.imagem.name
+                }, {
+                    where: {id: req.params.id}
+                })
+
+            })
+            .then(function () {
+                //upload: funcao responsavel por fazer upload de imagens
+                //para um correto funcionamento deve ser enviado o "req" e o "res"
+                resultUpload = imagens.upload(req, res, files);
+
+                res.redirect('/admin/redesSociais');
+
+            })
+            .catch(function (err) {
+                console.log('Erro ao atualizar base de dados');
+                console.log('Erro => ' + err);
+            })
+
+    })
 }
 
 exports.new = function (req, res) {
@@ -98,64 +83,45 @@ exports.new = function (req, res) {
 
 exports.create = function (req, res) {
 
-    form.parse(req, function(err, fields, files) {
+    var resultUpload;
+    var form = new formidable.IncomingForm();
 
-        var image = files.image
-            , image_upload_path_old = image.path
-            , image_upload_path_new = './public/images/uploads/'
-            , image_upload_name = image.name
-            , image_upload_path_name = image_upload_path_new + image_upload_name
-            ;
+    form.parse(req, function (err, fields, files) {
 
-        if (fs.existsSync(image_upload_path_new)) {
-            fs.rename(
-                image_upload_path_old,
-                image_upload_path_name,
-                function (err) {
-                    if (err) {
-                        console.log('Err: ', err);
-                        res.end('Erro ao mover a imagem!');
-                    }
-                    var msg = 'Imagem ' + image_upload_name + ' salva em: ' + image_upload_path_new;
-                    console.log(msg);
-                    res.end(msg);
-                });
-        }
-        else {
-            fs.mkdir(image_upload_path_new, function (err) {
-                if (err) {
-                    console.log('Err: ', err);
-                    res.end('Erro ao criar o diretório!');
-                }
-                fs.rename(
-                    image_upload_path_old,
-                    image_upload_path_name,
-                    function(err) {
-                        var msg = 'Imagem ' + image_upload_name + ' salva em: ' + image_upload_path_new;
-                        console.log(msg);
-                        res.end(msg);
-                    });
-            });
-        }
-    });
+        //upload: funcao responsavel por fazer upload de imagens
+        //para um correto funcionamento deve ser enviado o "req" e o "res"
+        resultUpload = imagens.upload(req, res, files);
 
+        db.RedesSociais
+            .create({
+                nome: fields.nome,
+                link: fields.link,
+                imagem: files.imagem.name
+            })
+            .then(function (result) {
+                res.redirect('/admin/redesSociais');
+            })
+            .catch(function (err) {
+                console.log('Erro ao inserir dados na tabela Redes Sociais => ' + err);
 
-
-    db.RedesSociais
-        .create(req.body)
-        .then(function (result) {
-            res.redirect('/admin/redesSociais');
-        })
-        .catch(function (err) {
-            console.log('Erro ao inserir dados na tabela Redes Sociais => ' + err);
-
-        })
+            })
+    })
 }
 
 exports.delete = function (req, res) {
 
+
     db.RedesSociais
-        .destroy({ where : { id : req.params.id } })
+        .findById(req.params.id)
+        .then(function (result) {
+            console.log('imagem que deve ser removida do banco e da pasta : ' + result.imagem);
+
+            //service responsavel por fazer a remoção da imagem antiga do diretorio, caso exista
+            imagens.remove(result.imagem);
+
+            return db.RedesSociais.destroy({where: {id: req.params.id}})
+
+        })
         .then(function (result) {
             res.redirect('/admin/redesSociais');
 
@@ -164,4 +130,6 @@ exports.delete = function (req, res) {
             console.log('Erro ao inserir dados na tabela Redes Sociais => ' + err);
 
         })
+
 }
+

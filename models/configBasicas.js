@@ -1,6 +1,6 @@
 module.exports = function (sequelize, Sequelize) {
     var ConfigBasicas = sequelize.define('ConfigBasicas', {
-        nomeEmpresa            : Sequelize.STRING,
+        nomeEmpresa     : Sequelize.STRING,
         logotipo        : Sequelize.STRING,
         email           : Sequelize.STRING,
         estado          : Sequelize.STRING,

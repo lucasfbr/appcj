@@ -14,8 +14,6 @@ var users = require('./routes/users');
 var servicos = require('./routes/servicos');
 var portifolio = require('./routes/portifolio');
 var quemsomos = require('./routes/quemsomos');
-var upload = require('./routes/upload');
-
 
 var app = express();
 
@@ -60,7 +58,6 @@ app.use('/users', users);
 app.use('/servicos', servicos);
 app.use('/portifolio', portifolio);
 app.use('/quemsomos', quemsomos);
-app.use('/upload', upload);
 app.use('/admin/', admin);
 
 

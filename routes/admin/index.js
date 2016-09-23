@@ -4,10 +4,6 @@ var router = express.Router();
 var serviceConfig  = require('./../../servicos/config');
 var serviceSociais  = require('./../../servicos/redesSociais');
 
-var formidable = require('formidable');
-var http       = require('http');
-var fs         = require('fs');
-
 var isAuthenticated = function (req, res, next) {
   // if user is authenticated in the session, call the next() to call the next request handler
   // Passport adds this method to request object. A middleware is allowed to add properties to
@@ -61,121 +57,16 @@ module.exports = function(passport){
     res.redirect('/');
   });
 
-  router.get('/upload', function (req, res) {
-    res.render('admin/upload');
-  })
-
-  router.post('/upload', function (req, res) {
-
-    var form = new formidable.IncomingForm();
-
-    form.parse(req, function(err, fields, files) {
-
-      var image = files.image
-          , image_upload_path_old = image.path
-          , image_upload_path_new = './public/images/uploads/'
-          , image_upload_name = image.name
-          , image_upload_path_name = image_upload_path_new + image_upload_name
-          ;
-
-      if (fs.existsSync(image_upload_path_new)) {
-        fs.rename(
-            image_upload_path_old,
-            image_upload_path_name,
-            function (err) {
-              if (err) {
-                console.log('Err: ', err);
-                res.end('Erro ao mover a imagem!');
-              }
-              var msg = 'Imagem ' + image_upload_name + ' salva em: ' + image_upload_path_new;
-              console.log(msg);
-              res.end(msg);
-            });
-      }
-      else {
-        fs.mkdir(image_upload_path_new, function (err) {
-          if (err) {
-            console.log('Err: ', err);
-            res.end('Erro ao criar o diretório!');
-          }
-          fs.rename(
-              image_upload_path_old,
-              image_upload_path_name,
-              function(err) {
-                var msg = 'Imagem ' + image_upload_name + ' salva em: ' + image_upload_path_new;
-                console.log(msg);
-                res.end(msg);
-              });
-        });
-      }
-    });
-
-  });
-
-
-
-
-
 
   router.get('/redesSociais', serviceSociais.findAll);
-
-  router.post('/redesSociais', function (req, res) {
-
-    var form = new formidable.IncomingForm();
-
-    form.parse(req, function(err, fields, files) {
-
-      var image = files.imagem
-          , image_upload_path_old = image.path
-          , image_upload_path_new = './public/images/uploads/'
-          , image_upload_name = image.name
-          , image_upload_path_name = image_upload_path_new + image_upload_name
-          ;
-
-      if (fs.existsSync(image_upload_path_new)) {
-        fs.rename(
-            image_upload_path_old,
-            image_upload_path_name,
-            function (err) {
-              if (err) {
-                console.log('Err: ', err);
-                res.end('Erro ao mover a imagem!');
-              }
-              var msg = 'Imagem ' + image_upload_name + ' salva em: ' + image_upload_path_new;
-              console.log(msg);
-              res.end(msg);
-            });
-      }
-      else {
-        fs.mkdir(image_upload_path_new, function (err) {
-          if (err) {
-            console.log('Err: ', err);
-            res.end('Erro ao criar o diretório!');
-          }
-          fs.rename(
-              image_upload_path_old,
-              image_upload_path_name,
-              function(err) {
-                var msg = 'Imagem ' + image_upload_name + ' salva em: ' + image_upload_path_new;
-                console.log(msg);
-                res.end(msg);
-              });
-        });
-      }
-    });
-  });
-
-
-
+  router.post('/redesSociais', serviceSociais.create);
   router.get('/redesSociais/new', serviceSociais.new);
-
-  router.put('/redesSociais/:id', serviceSociais.update);
+  router.post('/redesSociais/update/:id', serviceSociais.update);
   router.delete('/redesSociais/:id', serviceSociais.delete);
   router.get('/redesSociais/edit/:id', serviceSociais.edit);
+
   router.get('/config/edit/:id', serviceConfig.edit);
-
-
-  router.put('/config/:id', serviceConfig.update);
+  router.post('/config/update/:id', serviceConfig.update);
 
 
 

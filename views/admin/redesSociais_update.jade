@@ -26,8 +26,7 @@ block content
                                         h3.box-title Redes Sociais
                                     // /.box-header
                                     // form start
-                                    form.form-horizontal(name="formRedesSociais", method="POST", action="/admin/redesSociais/#{dados.id}" , enctype='multipart/form-data')
-                                        input(type="hidden", name="_method", value="PUT")
+                                    form.form-horizontal(method="post", action="/admin/redesSociais/update/#{dados.id}", enctype='multipart/form-data')
                                         .box-body
                                             .form-group
                                                 label.col-sm-2.control-label(for='nome') Nome
