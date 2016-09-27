@@ -67,9 +67,31 @@ $(document).ready(function() {
         }
     });
 
+    $("#redesSociais_cad, #redesSociais_update").validate({
+        // Define as regras
+        rules: {
+            nome: {
+                // campoNome será obrigatório (required)
+                required: true
+            },
+            link: {
+                // campoLink será obrigatório (required)
+                required: true
+            }
+        },
+        // Define as mensagens de erro para cada regra
+        messages: {
+            nome: {
+                required: "Digite o seu nome",
+            },
+            link: {
+                required: "Digite um link de redirecionamento",
+            }
+        }
+    });
+
 
     $('#telefone').mask('(00) 0000-0000');
-
 
 
 

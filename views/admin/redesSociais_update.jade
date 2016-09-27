@@ -16,7 +16,7 @@ block content
                 // cadastro box
                 .box
                     .box-header.with-border
-                        h3.box-title Cadastro
+                        h3.box-title Atualizar
                     .box-body
                         .row
                             .col-md-6
@@ -26,16 +26,16 @@ block content
                                         h3.box-title Redes Sociais
                                     // /.box-header
                                     // form start
-                                    form.form-horizontal(method="post", action="/admin/redesSociais/update/#{dados.id}", enctype='multipart/form-data')
+                                    form#redesSociais_update.form-horizontal(name="redesSociais_update", method="post", action="/admin/redesSociais/update/#{dados.id}", enctype='multipart/form-data')
                                         .box-body
                                             .form-group
                                                 label.col-sm-2.control-label(for='nome') Nome
                                                 .col-sm-10
-                                                    input#nome.form-control(name="nome" type='text', value="#{dados.nome}")
+                                                    input#nome.form-control(name="nome" type='text', value="#{dados.nome}", required='')
                                             .form-group
                                                 label.col-sm-2.control-label(for='link') Link
                                                 .col-sm-10
-                                                    input#link.form-control(name="link" type='text', value="#{dados.link}")
+                                                    input#link.form-control(name="link" type='text', value="#{dados.link}", , required='')
                                             .form-group
                                                 label.col-sm-2.control-label(for='imagem') Imagem
                                                 .col-sm-10

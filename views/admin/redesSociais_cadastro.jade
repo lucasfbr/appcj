@@ -26,16 +26,16 @@ block content
                                         h3.box-title Redes Sociais
                                     // /.box-header
                                     // form start
-                                    form.form-horizontal(action="/admin/redesSociais", method="post" enctype="multipart/form-data")
+                                    form#redesSociais_cad.form-horizontal(name="redesSociais_cad", action="/admin/redesSociais", method="post" enctype="multipart/form-data")
                                         .box-body
                                             .form-group
                                                 label.col-sm-2.control-label(for='nome') Nome
                                                 .col-sm-10
-                                                    input#nome.form-control(name="nome" type='text', placeholder='Nome')
+                                                    input#nome.form-control(name="nome" type='text', placeholder='Nome', required='')
                                             .form-group
                                                 label.col-sm-2.control-label(for='link') Link
                                                 .col-sm-10
-                                                    input#link.form-control(name="link" type='text', placeholder='link da rede social!')
+                                                    input#link.form-control(name="link" type='text', placeholder='link da rede social!', required='')
                                             .form-group
                                                 label.col-sm-2.control-label(for='imagem') Imagem
                                                 .col-sm-10

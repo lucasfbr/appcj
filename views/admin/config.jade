@@ -17,6 +17,20 @@ block content
                 .box
                     .box-header.with-border
                         h3.box-title Cadastro
+
+
+                        if sucesso != ''
+                            div.alert.alert-success.alert-dismissible.alertas.in(role="alert")
+                                button.close(data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true") &times
+                                p= sucesso
+
+                        if erro != ''
+                            div.alert.alert-danger.alert-dismissible.alertas(role="alert")
+                                button.close(data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true") &times
+                                p= erro
+
                         .box-tools.pull-right
                             button.btn.btn-box-tool(type='button', data-widget='collapse', data-toggle='tooltip', title='Collapse')
                                 i.fa.fa-minus
@@ -40,7 +54,7 @@ block content
                                             .form-group
                                                 label.col-sm-2.control-label(for='logotipo') Logotipo
                                                 .col-sm-10
-                                                    input#logotipo.form-control(type='file', name="logotipo", value="#{dados.logotipo}")
+                                                    input#logotipo.form-control(type='file', name="imagem")
                                             .form-group
                                                 label.col-sm-2.control-label(for='estado') Estado
                                                 .col-sm-10

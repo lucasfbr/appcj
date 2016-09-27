@@ -9,7 +9,9 @@ exports.findAll = function (req, res) {
         .findAll()
         .then(function (result) {
             res.render('admin/redesSociais', {
-                redesSociais: result
+                redesSociais: result,
+                sucesso: req.flash('sucesso'),
+                erro: req.flash('erro')
             });
 
         })
@@ -66,12 +68,16 @@ exports.update = function (req, res) {
                 //para um correto funcionamento deve ser enviado o "req" e o "res"
                 resultUpload = imagens.upload(req, res, files);
 
+                req.flash('sucesso', 'Dados alterados cum sucesso!');
                 res.redirect('/admin/redesSociais');
 
             })
             .catch(function (err) {
                 console.log('Erro ao atualizar base de dados');
                 console.log('Erro => ' + err);
+
+                req.flash('erro', 'Erro ao alterar os dados, tente novamente mais tarde!');
+                res.redirect('/admin/redesSociais');
             })
 
     })
@@ -99,10 +105,14 @@ exports.create = function (req, res) {
                 imagem: files.imagem.name
             })
             .then(function (result) {
+                req.flash('sucesso', 'Dados criados cum sucesso!');
                 res.redirect('/admin/redesSociais');
             })
             .catch(function (err) {
+
                 console.log('Erro ao inserir dados na tabela Redes Sociais => ' + err);
+                req.flash('erro', 'Erro ao criar os dados, tente novamente mais tarde!');
+                res.redirect('/admin/redesSociais');
 
             })
     })
@@ -123,11 +133,14 @@ exports.delete = function (req, res) {
 
         })
         .then(function (result) {
+            req.flash('sucesso', 'Dados removidos cum sucesso!');
             res.redirect('/admin/redesSociais');
 
         })
         .catch(function (err) {
             console.log('Erro ao inserir dados na tabela Redes Sociais => ' + err);
+            req.flash('erro', 'Erro ao remover os dados, tente novamente mais tarde!');
+            res.redirect('/admin/redesSociais');
 
         })
 

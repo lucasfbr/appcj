@@ -9,7 +9,9 @@ exports.edit = function (req, res) {
         .findById(req.params.id)
         .then(function (result) {
             res.render('admin/config', {
-                dados: result
+                dados: result,
+                sucesso: req.flash('sucesso'),
+                erro: req.flash('erro')
             });
 
         })
@@ -30,13 +32,16 @@ exports.update = function (req, res) {
         db.ConfigBasicas
             .findById(req.params.id)
             .then(function (result) {
-                console.log('imagem que deve ser removida do banco e da pasta : ' + result.imagem);
 
                 //service responsavel por fazer a remoção da imagem antiga do diretorio, caso exista
-                //imagens.remove(result.imagem);
+                if(result.logotipo) {
+                    console.log('imagem que deve ser removida do banco e da pasta : ' + result.logotipo);
+                    imagens.remove(result.logotipo);
+                }
 
                 return db.ConfigBasicas.update({
                     nomeEmpresa     : fields.nomeEmpresa,
+                    logotipo        : files.imagem.name,
                     email           : fields.email,
                     estado          : fields.estado,
                     cidade          : fields.cidade,
@@ -57,14 +62,20 @@ exports.update = function (req, res) {
             .then(function () {
                 //upload: funcao responsavel por fazer upload de imagens
                 //para um correto funcionamento deve ser enviado o "req" e o "res"
-                //resultUpload = imagens.upload(req, res, files);
+                resultUpload = imagens.upload(req, res, files);
 
+                req.flash('sucesso', 'Dados registrados cum sucesso!');
                 res.redirect('/admin/config/edit/1');
 
             })
             .catch(function (err) {
+
                 console.log('Erro ao atualizar base de dados');
                 console.log('Erro => ' + err);
+
+                req.flash('erro', 'Erro ao registrar os dados, tente novamente mais tarde');
+                res.redirect('/admin/config/edit/1');
+
             })
 
     })

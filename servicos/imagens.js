@@ -68,7 +68,7 @@ exports.remove = function (imagem) {
         })
 
     }else{
-        console.log('A imagem: ' + imagem + 'nao existe no diretorio: ' + image_upload_path)
+        console.log('A imagem: ' + imagem + ' nao existe no diretorio: ' + image_upload_path)
     }
 
 }

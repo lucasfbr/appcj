@@ -1,3 +1,16 @@
+.error{
+    width: 100%;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+
+
 .botaoAddSocial{
     margin-bottom: 10px !important;
 }
@@ -14,3 +27,51 @@
 .formExcluir{
     float: left;
 }
+
+
+.alertas{
+    margin-top: 15px;
+}
+
+
+/*INICIO EFEITO FADE NOS ALERTS*/
+
+.alert{
+    -webkit-animation: fadein 2.5s; /* Safari and Chrome */
+    -moz-animation: fadein 2.5s; /* Firefox */
+    -ms-animation: fadein 2.5s; /* Internet Explorer */
+    -o-animation: fadein 2.5s; /* Opera */
+    animation: fadein 2.5s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}​
+
+/* Opera */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}​
+
+
+/*FIM EFEITO FADE NOS ALERTS*/
