@@ -1,0 +1,71 @@
+extends ../layout_painel
+block content
+    .content-wrapper
+        // Content Header (Page header)
+        section.content-header
+            h1 Dashboard
+                small Control panel
+            ol.breadcrumb
+                li
+                    a(href='#')
+                        i.fa.fa-dashboard
+                        | Home
+
+                li.active Dashboard
+        // INICIO DO CONTEUDO DAS PAGINAS
+        // Main content
+        section.content
+                    .row
+                        .col-md-12
+                                section#chat
+                                        div(class="container", ng-controller="clienteChatController", ng-show="exibirChat")
+                                            .row
+                                                .col-xs-12
+                                                #salaChat
+                                                    .col-xs-12
+                                                        .col-xs-4
+                                                            .row
+                                                                div(id="usuarioTitular", data-usuarioTitular="#{nickname}")
+                                                                    .usuarioTitularImg
+                                                                        .usuarioTitular_img
+                                                                            img.img-circle(src='/images/default.jpg', alt='...', title="#{nickname}")
+                                                        .col-xs-8
+                                                            .row
+                                                                #usuarioSecundario
+                                                                    div(ng-show="exibirBatePapo")
+                                                                        .usuarioSecundarioImg
+                                                                            .usuarioSecundario_img
+                                                                                img.img-circle(src="{{usuarioSecundarioFoto}}", alt='...')
+                                                                        .usuarioSecundarioTxt
+                                                                            .usuarioSecundario_txt
+                                                                                p
+                                                                                    {{usuarioSecundarioNick}}
+                                                    .col-xs-12
+                                                        .col-xs-4
+                                                            .row
+                                                                #usuarios
+                                                                    div#usuario.list-group
+                                                                        div(ng-repeat="usuario in usuarios")
+                                                                            button#nickUsuario.list-group-item(data-nome="{{usuario}}", type='button', class="{{usuario}}", ng-click="iniciarBatePapo(usuario)")
+                                                                                .usuario_img
+                                                                                    img#teste.img-circle(src='/images/default.jpg', alt='...')
+                                                                                    div#online(ng-show="online == true")
+                                                                                    div#offline(ng-show="offline == true")
+                                                                                .usuario_txt
+                                                                                    p
+                                                                            {{usuario}}
+
+                                                        .col-xs-8
+                                                            .row
+                                                                #mensagens
+                                                                form#frmMensagens
+                                                                    .form-group
+                                                                        .input-group
+                                                                            input#cpMensagem.form-control(type='text', placeholder='Digite uma mensagem', required='', ng-model="novaMensagem", ng-keyup="$event.keyCode == 13 ? enviarmensagem() : null")
+                                                                            span.input-group-btn
+                                                                                //input.btn.btn-default(type='submit', value='Enviar')
+                                                                                button.btn.btn-default(type='button', ng-click="enviarmensagem()") Enviar
+
+            
+            
+            
