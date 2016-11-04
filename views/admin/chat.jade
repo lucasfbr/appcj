@@ -18,26 +18,26 @@ block content
                     .row
                         .col-md-12
                                 section#chat
-                                        div(class="container", ng-controller="clienteChatController", ng-show="exibirChat")
+                                        div(class="container", ng-controller="consultorChatController", ng-show="exibirChat")
                                             .row
                                                 .col-xs-12
                                                 #salaChat
                                                     .col-xs-12
                                                         .col-xs-4
                                                             .row
-                                                                div(id="usuarioTitular", data-usuarioTitular="#{nickname}")
+                                                                div(id="usuarioTitular", data-usuarioTitular="#{user.username}")
                                                                     .usuarioTitularImg
                                                                         .usuarioTitular_img
-                                                                            img.img-circle(src='/images/default.jpg', alt='...', title="#{nickname}")
+                                                                            img.img-circle(src='/images/default.jpg', alt='...', title="#{user.username}")
                                                         .col-xs-8
                                                             .row
                                                                 #usuarioSecundario
                                                                     div(ng-show="exibirBatePapo")
                                                                         .usuarioSecundarioImg
                                                                             .usuarioSecundario_img
-                                                                                img.img-circle(src="{{usuarioSecundarioFoto}}", alt='...')
+                                                                                    img.img-circle(src="{{usuarioSecundarioFoto}}", alt='...')
                                                                         .usuarioSecundarioTxt
-                                                                            .usuarioSecundario_txt
+                                                                            div.usuarioSecundario_txt(data-usuarioSecundario="{{usuarioSecundarioNick}}")
                                                                                 p
                                                                                     {{usuarioSecundarioNick}}
                                                     .col-xs-12
@@ -45,15 +45,15 @@ block content
                                                             .row
                                                                 #usuarios
                                                                     div#usuario.list-group
-                                                                        div(ng-repeat="usuario in usuarios")
-                                                                            button#nickUsuario.list-group-item(data-nome="{{usuario}}", type='button', class="{{usuario}}", ng-click="iniciarBatePapo(usuario)")
+                                                                        div(ng-repeat="cliente in clientes")
+                                                                            button#nickUsuario.list-group-item(data-nome="{{cliente}}", type='button', class="{{cliente}}", ng-click="iniciarBatePapo(cliente)")
                                                                                 .usuario_img
                                                                                     img#teste.img-circle(src='/images/default.jpg', alt='...')
                                                                                     div#online(ng-show="online == true")
                                                                                     div#offline(ng-show="offline == true")
                                                                                 .usuario_txt
                                                                                     p
-                                                                            {{usuario}}
+                                                                                        {{cliente}}
 
                                                         .col-xs-8
                                                             .row

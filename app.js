@@ -22,8 +22,11 @@ var io = require('socket.io')(server);
 
 //representa o cliente que esta acessando o chat
 var cliente;
-//representa os consultores que estao atendendo no site
-var usuarios = {};
+//representa o consultor que esta acessando o chat
+var consultor;
+//array para armazenar os clientes e os consultores disponiveis para chat
+var clientes    = {};
+var consultores = {};
 
 //Isso simplesmente acrescenta socket.io a res em nosso ciclo de eventos.
 app.use(function (req, res, next) {
@@ -83,68 +86,82 @@ app.use('/admin/chat', chat);
 //este evento ja vem definido por padrao no socket.io
 io.sockets.on('connection', function (socket) {
 
-    db.Users
-        .findAll({
-            where: {
-                admin: 1
-            }
-        })
-        .then(function (result) {
 
-            if (result) {
+    socket.on('entrar cliente', function (nickname) {
 
-                for(var i = 0; i < result.length; i++) {
-
-                    //o nickname esta sendo criado dentro do socket
-                    socket.nickname = result[i].nickname;
-
-                    //usuario criado dentro do array usuarios
-                    usuarios[socket.nickname] = socket;
-
-                }
-
-                //atualiza nossa lista de usuarios
-                atualizarUsuarios();
-
-            }else{
-                console.log("Nenhum administrador cadastrado até o momento!")
-            }
-
-        })
-        .catch(function (err) {
-
-            console.log('Erro ao efetuar a busca: ' + err);
-
-        });
-
-
-    socket.on('entrar chat', function (nickname) {
+        //busca todos os consultores cadastrados no banco e armazena no array consultores
+        //buscaConsultores();
 
         //o nickname esta sendo criado dentro do socket
-        socket.cliente = nickname;
+        socket.nickname = nickname;
+        clientes[socket.nickname] = socket;
 
-        console.log(socket.cliente + " entrou no chat");
+        console.log("Cliente " + socket.nickname + " entrou no chat");
+
+    });
+
+   socket.on('entrar consultor', function (nickname) {
+
+        //busca todos os clientes liberados para o chat e armazena no array clientes
+        //buscaClientes();
+
+        //o nickname esta sendo criado dentro do socket
+        socket.nickname = nickname;
+        consultores[socket.nickname] = socket;
+
+        console.log("Consultor " + socket.nickname + " entrou no chat");
+
+    });
+
+    //mensagem vinda do painel administratico, partindo do consultor para o cliente
+    socket.on('mensagem para o cliente', function (dados) {
+
+        //removendo os espaços em branco do inicio e do final da string
+        var de           = dados.de
+        var para         = dados.para;
+        var mensagem     = dados.mensagem.trim();
+        var dataAtual    = pegarDataAtual();
+
+        //verificando se o destinatario existe no array de clientes
+        //if(para in clientes) {
+
+
+            console.log('DE : ' + de);
+
+            //enviando para o cliente de destino
+            //clientes[para].emit();
+            clientes[para].emit('nova mensagem', {msg: mensagem, nick: socket.nickname, dataAtual: dataAtual, cor: true});
+
+            consultores[de].emit('msg enviada pelo consultor', {msg: mensagem, nick: socket.nickname, dataAtual: dataAtual, cor: false});
+
+        //replicando a mensagem para o consultor que enviou a mensagem
+        //socket.emit('msg enviada pelo consultor', {msg: mensagem, nick: clientes[para].nickname, dataAtual: dataAtual});
+
+        //}else{
+
+            //envio de uma mensagem de alerta para o cliente
+        //    console.log('O cliente : ' + para + ' nao foi encontrado!')
+        //}
 
     });
 
 
-    //ao escutar o evento enviar mensagem, devemos receber uma mensagem = msg e um nickname = para
-    //ou seja mensagem para determinado usuario
-    socket.on('enviar mensagem', function (dados) {
+    //mensagem vinda da area de chat do cliente
+    socket.on('mensagem para o consultor', function (dados) {
 
         //removendo os espaços em branco do inicio e do final da string
         var nome         = dados[0].nickname;
-        var mensagem     = dados[0].mensagem.trim();
+        var mensagem     = dados[0].mensagem;
         var dataAtual    = pegarDataAtual();
 
         //verificando se o usuario existe no array de usuarios
-        if(nome in usuarios) {
+        if(nome in consultores) {
 
             //enviando para o consultor de destino
-            //usuarios[nome].emit('nova mensagem', {msg: mensagem, nick: socket.nickname, dataAtual: dataAtual, cor: true});
+            consultores[nome].emit('nova mensagem do cliente', {msg: mensagem, nick: socket.nickname, dataAtual: dataAtual, cor: true});
 
-            //replicando a mensagem para o cliente que enviou a mesma
-            socket.emit('nova mensagem', {msg: mensagem, nick: usuarios[nome].nickname, dataAtual: dataAtual});
+            //replicando a mensagem para o cliente que enviou a mensagem
+            socket.emit('msg enviada pelo cliente', {msg: mensagem, nick: usuarios[nome].nickname, dataAtual: dataAtual});
 
         }else{
 
@@ -159,16 +176,33 @@ io.sockets.on('connection', function (socket) {
     //este evento ja vem definido por padrao no socket.io
     socket.on('disconnect', function () {
 
-        if(!socket.cliente) return;
+        if(socket.cliente){
 
-        console.log(socket.cliente + " saiu do chat")
+            console.log(socket.cliente + " saiu do chat")
+
+        }else if(socket.consultor){
+
+            console.log(socket.consultor + " saiu do chat")
+
+        }else{
+            return;
+        }
 
     })
 
+    //utilizado pelos clientes para visualizar os consultores
+    function atualizarConsultores() {
 
-    function atualizarUsuarios() {
+        //console.log('atualiza consultores : ' + consultores)
 
-        io.sockets.emit('atualiza usuarios', Object.keys(usuarios));
+        io.sockets.emit('atualiza consultores', Object.keys(consultores));
+
+    }
+
+    //utilizado no painel administrativo para visualizar os clientes
+    function atualizarClientes() {
+
+        io.sockets.emit('atualiza clientes', Object.keys(clientes));
 
     }
 
@@ -183,6 +217,84 @@ io.sockets.on('connection', function (socket) {
 
         var dataFormatada = dia + "/" + mes + "/" + ano + " " + hora + ":" + minuto + ":" + segundo;
         return dataFormatada;
+    }
+
+    function buscaConsultores() {
+
+        db.Users
+            .findAll({
+                where: {
+                    admin: 1
+                }
+            })
+            .then(function (result) {
+
+                if (result) {
+
+                    for(var i = 0; i < result.length; i++) {
+
+                        //o nickname esta sendo criado dentro do socket
+                        socket.nickname = result[i].nickname;
+
+                        //usuario criado dentro do array usuarios
+                        consultores[socket.nickname] = socket;
+
+                    }
+
+                    //atualiza nossa lista de consultores
+                    atualizarConsultores();
+
+                }else{
+                    console.log("Nenhum consultor cadastrado até o momento!")
+                }
+
+            })
+            .catch(function (err) {
+
+                console.log('Erro ao efetuar a busca: ' + err);
+
+            });
+
+    }
+
+    function buscaClientes() {
+
+        db.Users
+            .findAll({
+                where: {
+                    admin: 0,
+                    status: 1,
+                    statusChat: 1
+                }
+            })
+            .then(function (result) {
+
+                if (result) {
+
+                    for(var i = 0; i < result.length; i++) {
+
+                        //o nickname esta sendo criado dentro do socket
+                        socket.nickname = result[i].nickname;
+
+                        //usuario criado dentro do array usuarios
+                        clientes[socket.nickname] = socket;
+
+                    }
+
+                    //atualiza nossa lista de consultores
+                    atualizarClientes();
+
+                }else{
+                    console.log("Nenhum cliente cadastrado até o momento!")
+                }
+
+            })
+            .catch(function (err) {
+
+                console.log('Erro ao efetuar a busca: ' + err);
+
+            });
+
     }
 
 });

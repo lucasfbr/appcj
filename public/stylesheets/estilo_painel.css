@@ -200,7 +200,7 @@
 
 .usuarioSecundarioImg{;
     float: left;
-    background: #F2F2F2;
+
 }
 
 .usuarioSecundarioTxt{
@@ -215,12 +215,11 @@
 
 .usuarioSecundario_txt{
     float: left;
-    color: #828282;
-
 }
 
 .usuarioSecundario_txt p {
-
+    color: #fff;
+    font-weight: bold;
 }
 
 .cpMensagem{

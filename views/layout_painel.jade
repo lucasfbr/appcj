@@ -225,7 +225,7 @@ html(ng-app="app")
                         .pull-left.image
                             img.img-circle(src='/dist/img/user2-160x160.jpg', alt='User Image')
                         .pull-left.info
-                            p Alexander Pierce
+                            p #{user.firstname} #{user.lastname}
                             a(href='#')
                                 i.fa.fa-circle.text-success
                                 | Online
@@ -483,7 +483,6 @@ html(ng-app="app")
 
         //socket.io(Chat)
         script(src="/socket.io/socket.io.js")
-        script(type='text/javascript', src='/javascripts/chat.js')
 
         // jQuery 2.1.4
         script(src='/plugins/jQuery/jQuery-2.1.4.min.js')

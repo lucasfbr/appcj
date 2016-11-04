@@ -39,15 +39,15 @@ block content
                                 .row
                                     #usuarios
                                         div#usuario.list-group
-                                            div(ng-repeat="usuario in usuarios")
-                                                button#nickUsuario.list-group-item(data-nome="{{usuario}}", type='button', class="{{usuario}}", ng-click="iniciarBatePapo(usuario)")
+                                            div(ng-repeat="consultor in consultores")
+                                                button#nickUsuario.list-group-item(data-nome="{{consultor}}", type='button', class="{{consultor}}", ng-click="iniciarBatePapo(consultor)")
                                                     .usuario_img
                                                         img#teste.img-circle(src='/images/default.jpg', alt='...')
                                                         div#online(ng-show="online == true")
                                                         div#offline(ng-show="offline == true")
                                                     .usuario_txt
                                                         p
-                                                            {{usuario}}
+                                                            {{consultor}}
 
                             .col-xs-8
                                     .row

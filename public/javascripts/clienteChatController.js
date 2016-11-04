@@ -22,21 +22,20 @@ app.controller('clienteChatController', function($scope, $http, socket) {
     //armazena uma nova mensagem que deve ser enviada
     $scope.novaMensagem = "";
 
-    $scope.usuariochat = [];
+    //array que vai armazenar a mensagem enviada para um determinado nick-name(consultor)
+    $scope.consultorChat = [];
 
     /*###### FIM DAS VARIAVEIS UTILIZADAS NO PROJETO  #######*/
 
     /*###### INICIO SOCKET.IO ######*/
 
-    //cria um novo usuario no socket com o nome do cliente
-    socket.emit('entrar chat', $scope.usuarioTitular);
+    //cria um novo cliente no socket
+    socket.emit('entrar cliente', $scope.usuarioTitular);
 
     //recebe um array com os consultores disponiveis para este cliente
-    socket.on('atualiza usuarios', function (usuarios) {
+    socket.on('atualiza consultores', function (consultores) {
 
-        $scope.usuarios = usuarios;
-
-        console.log($scope.usuarios)
+        $scope.consultores = consultores;
 
     });
 
@@ -44,9 +43,9 @@ app.controller('clienteChatController', function($scope, $http, socket) {
     $scope.enviarmensagem = function () {
 
         //objeto com informacoes da conversa
-        $scope.usuariochat.push({nickname : $scope.usuarioSecundarioNick, mensagem : $scope.novaMensagem});
+        $scope.consultorChat.push({nickname : $scope.usuarioSecundarioNick, mensagem : $scope.novaMensagem});
 
-        socket.emit('enviar mensagem', $scope.usuariochat);
+        socket.emit('enviar mensagem', $scope.consultorChat);
 
         $scope.novaMensagem = '';
 
@@ -76,13 +75,13 @@ app.controller('clienteChatController', function($scope, $http, socket) {
 
     /*###### INICIO FUNCOES DO PROJETO ######*/
 
-    //funcao acionada pelo evento ng-click para iniciar uma conversa com outro usuario
-    $scope.iniciarBatePapo = function (usuario) {
+    //funcao acionada pelo evento ng-click para iniciar uma conversa com outro consultor
+    $scope.iniciarBatePapo = function (consultor) {
 
         //exibe o usuario selecionado para conversar
         $scope.exibirBatePapo = true
-        //nickname do usuario selecionado para iniciar uma conversa
-        $scope.usuarioSecundarioNick = usuario;
+        //nickname do consultor selecionado para iniciar uma conversa
+        $scope.usuarioSecundarioNick = $("#nickUsuario").attr("data-nome");
         //foto do usuario selecionado para iniciar uma conversa
         $scope.usuarioSecundarioFoto = "/images/default.jpg";
 
